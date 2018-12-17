@@ -1,17 +1,18 @@
-var speed = 100;
+var speed = 10;
+var direction = "left";
+var size = 1;
 var santa = document.getElementById("santa");
-var fireplace = document.getElementById("fireplace");
+var fireplace;
 
-turnInterval = setInterval(turn, speed); // Call the turn function periodically
+turnInterval = setInterval(move, speed); // Call the turn function periodically
 
 oxo.screens.loadScreen("game", function() {
   console.log("loaded GAME");
+  fireplace = document.getElementById("fireplace");
 });
 
-function turn() {
-  oxo.animation.move(fireplace, "left", 10); // Move 10px to the right
+function move() {
+  console.log(fireplace);
+  oxo.animation.move(fireplace, direction, size, true); // Move 10px to the left
   console.log("debug");
-}
-
-
-turn();
+} 

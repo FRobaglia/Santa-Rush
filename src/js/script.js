@@ -6,21 +6,28 @@ var fireplace;
 
 turnInterval = setInterval(move, speed); // Call the turn function periodically
 
+/** DOM Elements */
+const DOM = {
+  fireplace: null,
+  santa: null
+};
+
+/** Functions */
+function getDOMElements() {
+  DOM.fireplace = document.getElementById("santa");
+  DOM.santa = document.getElementById("fireplace");
+}
+
 oxo.screens.loadScreen("game", function() {
-  fireplace = document.getElementById("fireplace");
-  santa = document.getElementById("santa");
-  oxo.elements.onCollisionWithElement(santa, fireplace, function() {
-  console.log("you lost");
-  });
+  getDOMElements();
 });
 
 function move() {
-  oxo.animation.move(fireplace, direction, size, true); // Move "size" pixels to the "direction"
+  oxo.animation.move(DOM.fireplace, direction, 1, true); // Move "size" pixels to the "direction"
 } 
 function jump() {
-  oxo.animation.move(santa, 'up', 100, true);
+  oxo.animation.move(DOM.santa, 'up', 100, true);
 }
-
 
 oxo.inputs.listenKey('up', function() {
   jump();

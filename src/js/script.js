@@ -55,19 +55,6 @@ function stage() {
   oxo.animation.move(fireplace, direction, size, true);
 }
 
-function addFireplace() {
-  // Add a bonus element to the screen at a random position
-  var randomFireplace = oxo.elements.createElement({
-    class: ".stage__fireplace",
-    styles: {
-      transform:
-        "translate(" + oxo.utils.getRandomNumber(0, firepl - 1) * size + "px, "
-    }
-  });
-  oxo.elements.onCollisionWithElementOnce(santa, randomFireplace, function() {
-    console.log("newFireplaceCollisioned");
-  });
-}
 
 oxo.inputs.listenKey("up", function() {
   jump();

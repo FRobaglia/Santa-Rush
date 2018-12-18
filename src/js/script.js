@@ -25,11 +25,9 @@ oxo.screens.loadScreen("game", function() {
 
 
 function move() {
-  oxo.animation.move(fireplace, direction, size, true); // Move "size" pixels to the "direction"
-} 
-function move() {
-  oxo.animation.move(santa, directionDown, gravity, true); // Move "size" pixels to the "direction"
-}; 
+  oxo.animation.move(fireplace, direction, size, true); 
+  oxo.animation.move(santa, directionDown, gravity, true);// Move "size" pixels to the "direction"
+};
 
 function jump() {
   oxo.animation.move(santa, 'up', 90, true);

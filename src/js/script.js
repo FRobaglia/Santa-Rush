@@ -21,20 +21,16 @@ oxo.inputs.listenKey("enter", function() {
       oxo.elements.onCollisionWithElement(santa, fireplace, function() {
         console.log("you lost");
       });
-      !oxo.elements.onCollisionWithElement(santa, ground, function() {
-        oxo.animation.move(santa, directionDown, gravity, true);
-      });
     });
   }
 });
 
-
 function alwaysHappening() {
   oxo.animation.move(fireplace, direction, size, true);
-  oxo.animation.move(santa, directionDown, gravity, true);
-}; 
-
-
+  if (oxo.elements.onCollisionWithElement(santa, ground)) {
+    console.log("test")
+  }
+}
 
 function jump() {
   oxo.animation.move(santa, "up", 100, true);

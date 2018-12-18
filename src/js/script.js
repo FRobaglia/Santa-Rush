@@ -17,15 +17,17 @@ oxo.inputs.listenKeyOnce("enter", function() {
       ground = oxo.elements.createElement({
         obstacle: true,
         class: "stage__ground", // optional,
-        styles: { // optional
-          transform: 'translate(0px, 479px)'
-        },
+        styles: {
+          // optional
+          transform: "translate(0px, 479px)"
+        }
       });
       santa = oxo.elements.createElement({
         class: "character__santa", // optional,
-        styles: { // optional
-          transform: 'translate(50px, 279px)'
-        },
+        styles: {
+          // optional
+          transform: "translate(50px, 279px)"
+        }
       });
       santaInterval = setInterval(playerFall, santaSpeed);
       stageInterval = setInterval(stage, stageSpeed); // Call the turn function periodically
@@ -54,7 +56,6 @@ function playerFall() {
 function stage() {
   oxo.animation.move(fireplace, direction, size, true);
 }
-
 
 oxo.inputs.listenKey("up", function() {
   jump();

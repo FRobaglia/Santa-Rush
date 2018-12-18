@@ -9,6 +9,7 @@ var fireplace;
 var ground;
 var santaInterval;
 var stageInterval;
+
 oxo.inputs.listenKeyOnce("enter", function() {
   if (oxo.screens.getCurrentScreen !== "game") {
     oxo.screens.loadScreen("game", function() {

@@ -9,8 +9,6 @@ var fireplace;
 var ground;
 var santaInterval;
 var stageInterval;
-var gift = query.getElementById("gift");
-
 oxo.inputs.listenKeyOnce("enter", function() {
   if (oxo.screens.getCurrentScreen !== "game") {
     oxo.screens.loadScreen("game", function() {

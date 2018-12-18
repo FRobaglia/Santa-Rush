@@ -53,6 +53,7 @@ oxo.inputs.listenKey('space', function() {
     console.log("Oui");
     drop();
   });
+  
 });
 
 function jump() {
@@ -69,7 +70,6 @@ function playerFall() {
 function stage() {
   oxo.animation.move(fireplace, direction, size, true);
 }
-<<<<<<< HEAD
 function drop() {
   oxo.animation.move(gift, directionDown,gravity,true);
 }
@@ -86,9 +86,6 @@ function addFireplace() {
     console.log("newFireplaceCollisioned");
   });
 }
-=======
-
->>>>>>> 8490eef4c2ed89472c3e1e59ef921bd048f155b3
 
 oxo.inputs.listenKey("up", function() {
   jump();

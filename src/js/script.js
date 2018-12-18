@@ -1,5 +1,5 @@
 var santaSpeed = 10;
-var stageSpeed = 100;
+var stageSpeed = 10;
 var direction = "left";
 var directionDown = "down";
 var gravity = 1;
@@ -10,14 +10,14 @@ var ground;
 var santaInterval;
 var stageInterval;
 
-oxo.inputs.listenKey("enter", function() {
+oxo.inputs.listenKeyOnce("enter", function() {
   if (oxo.screens.getCurrentScreen !== "game") {
     oxo.screens.loadScreen("game", function() {
       fireplace = document.getElementById("fireplace");
       santa = document.getElementById("santa");
       ground = document.getElementById("ground");
-      santaInterval = setInterval(alwaysHappening, santaSpeed); // Call the turn function periodically
-      stageInterval = setInterval(alwaysHappening, stageSpeed); // Call the turn function periodically
+      santaInterval = setInterval(player, santaSpeed);
+      stageInterval = setInterval(stage, stageSpeed); // Call the turn function periodically
       oxo.elements.onCollisionWithElement(santa, fireplace, function() {
         console.log("you lost");
       });
@@ -25,11 +25,11 @@ oxo.inputs.listenKey("enter", function() {
   }
 });
 
-function alwaysHappening() {
-  oxo.animation.move(fireplace, direction, size, true);
+function player() {
+  oxo.animation.move(santa, directionDown, gravity, true);
 }
-function jump() {
-  oxo.animation.move(santa, "up", 100, true);
+function stage() {
+  oxo.animation.move(fireplace, direction, size, true);
 }
 
 function addFireplace() {
@@ -48,5 +48,5 @@ function addFireplace() {
   });
 }
 oxo.inputs.listenKey("up", function() {
-  jump();
+  oxo.animation.move(santa, "up", 100, true);
 });

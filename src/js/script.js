@@ -27,15 +27,26 @@ oxo.inputs.listenKey("enter", function() {
 
 function alwaysHappening() {
   oxo.animation.move(fireplace, direction, size, true);
-  if (oxo.elements.onCollisionWithElement(santa, ground)) {
-    console.log("test")
-  }
 }
-
 function jump() {
   oxo.animation.move(santa, "up", 100, true);
 }
 
+function addFireplace() {
+  // Add a bonus element to the screen at a random position
+  var randomFireplace = oxo.elements.createElement({
+    class: '.stage__fireplace',
+    styles: {
+      transform:
+        'translate(' +
+        oxo.utils.getRandomNumber(0, xSquares - 1) * size +
+        'px, '
+    },
+  });
+  oxo.elements.onCollisionWithElementOnce(santa, randomFireplace, function() {
+    console.log('nique ta mere')
+  });
+}
 oxo.inputs.listenKey("up", function() {
   jump();
 });

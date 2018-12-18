@@ -2,24 +2,38 @@ var santaSpeed = 10;
 var stageSpeed = 10;
 var direction = "left";
 var directionDown = "down";
-var gravity = 3;
-var size = 1;
+var gravity = 4;
+var size = 4;
 var santa;
 var fireplace;
-var ground;
 var santaInterval;
 var stageInterval;
+var ground;
 
 oxo.inputs.listenKeyOnce("enter", function() {
   if (oxo.screens.getCurrentScreen !== "game") {
     oxo.screens.loadScreen("game", function() {
       fireplace = document.getElementById("fireplace");
-      santa = document.getElementById("santa");
-      ground = document.getElementById("ground");
-      santaInterval = setInterval(player, santaSpeed);
+      ground = oxo.elements.createElement({
+        obstacle: true,
+        class: "stage__ground", // optional,
+        styles: { // optional
+          transform: 'translate(0px, 479px)'
+        },
+      });
+      santa = oxo.elements.createElement({
+        class: "character__santa", // optional,
+        styles: { // optional
+          transform: 'translate(50px, 279px)'
+        },
+      });
+      santaInterval = setInterval(playerFall, santaSpeed);
       stageInterval = setInterval(stage, stageSpeed); // Call the turn function periodically
       oxo.elements.onCollisionWithElement(santa, fireplace, function() {
         console.log("you lost");
+      });
+      oxo.elements.onCollisionWithElement(santa, ground, function() {
+        console.log("collision with ground");
       });
     });
   }
@@ -34,7 +48,7 @@ function jump() {
   }
 }
 
-function player() {
+function playerFall() {
   oxo.animation.move(santa, directionDown, gravity, true);
 }
 function stage() {
@@ -47,29 +61,13 @@ function addFireplace() {
     class: ".stage__fireplace",
     styles: {
       transform:
-        'translate(' +
-        oxo.utils.getRandomNumber(0, firepl - 1) * size +
-        'px, '
-    },
-  });
-  oxo.elements.onCollisionWithElementOnce(santa, randomFireplace, function() {
-    console.log('newFireplaceCollisioned')
-  });
-}
-
-/* function randomFireplace() {
-  var fireplace = oxo.elements.createElement({
-    styles: {
-      transform:
-        'translate(' +
-        oxo.utils.getRandomNumber(0, xSquares - 1) * size +
-        'px, ' +
-        oxo.utils.getRandomNumber(0, ySquares - 1) * size +
-        'px)',
+        "translate(" + oxo.utils.getRandomNumber(0, firepl - 1) * size + "px, "
     }
   });
+  oxo.elements.onCollisionWithElementOnce(santa, randomFireplace, function() {
+    console.log("newFireplaceCollisioned");
+  });
 }
-*/ 
 
 oxo.inputs.listenKey("up", function() {
   jump();

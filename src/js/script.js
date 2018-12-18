@@ -31,7 +31,7 @@ function stage() {
   oxo.animation.move(fireplace, direction, size, true);
 }
 
-/* function addFireplace() {
+function addFireplace() {
   // Add a bonus element to the screen at a random position
   var randomFireplace = oxo.elements.createElement({
     class: '.stage__fireplace',
@@ -46,7 +46,6 @@ function stage() {
     console.log('newFireplaceCollisioned')
   });
 }
-*/
 
 /* function randomFireplace() {
   var fireplace = oxo.elements.createElement({

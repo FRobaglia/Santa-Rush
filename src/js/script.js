@@ -47,15 +47,29 @@ function addFireplace() {
     class: ".stage__fireplace",
     styles: {
       transform:
-        "translate(" +
-        oxo.utils.getRandomNumber(0, xSquares - 1) * size +
-        "px, "
-    }
+        'translate(' +
+        oxo.utils.getRandomNumber(0, firepl - 1) * size +
+        'px, '
+    },
   });
   oxo.elements.onCollisionWithElementOnce(santa, randomFireplace, function() {
-    console.log("nique ta mere");
+    console.log('newFireplaceCollisioned')
   });
 }
+
+/* function randomFireplace() {
+  var fireplace = oxo.elements.createElement({
+    styles: {
+      transform:
+        'translate(' +
+        oxo.utils.getRandomNumber(0, xSquares - 1) * size +
+        'px, ' +
+        oxo.utils.getRandomNumber(0, ySquares - 1) * size +
+        'px)',
+    }
+  });
+}
+*/ 
 
 oxo.inputs.listenKey("up", function() {
   jump();

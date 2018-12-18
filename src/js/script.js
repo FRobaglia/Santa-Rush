@@ -9,6 +9,7 @@ var fireplace;
 var ground;
 var santaInterval;
 var stageInterval;
+var gift = query.getElementById("gift");
 
 oxo.inputs.listenKeyOnce("enter", function() {
   if (oxo.screens.getCurrentScreen !== "game") {
@@ -32,21 +33,37 @@ function stage() {
   oxo.animation.move(fireplace, direction, size, true);
 }
 
-function addFireplace() {
+/* function addFireplace() {
   // Add a bonus element to the screen at a random position
   var randomFireplace = oxo.elements.createElement({
     class: '.stage__fireplace',
     styles: {
       transform:
         'translate(' +
-        oxo.utils.getRandomNumber(0, xSquares - 1) * size +
+        oxo.utils.getRandomNumber(0, firepl - 1) * size +
         'px, '
     },
   });
   oxo.elements.onCollisionWithElementOnce(santa, randomFireplace, function() {
-    console.log('nique ta mere')
+    console.log('newFireplaceCollisioned')
   });
 }
+*/
+
+/* function randomFireplace() {
+  var fireplace = oxo.elements.createElement({
+    styles: {
+      transform:
+        'translate(' +
+        oxo.utils.getRandomNumber(0, xSquares - 1) * size +
+        'px, ' +
+        oxo.utils.getRandomNumber(0, ySquares - 1) * size +
+        'px)',
+    }
+  });
+}
+*/ 
+
 oxo.inputs.listenKey("up", function() {
   oxo.animation.move(santa, "up", 100, true);
 });

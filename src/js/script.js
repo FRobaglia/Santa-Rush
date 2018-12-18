@@ -16,18 +16,14 @@ oxo.inputs.listenKey("enter", function() {
       fireplace = document.getElementById("fireplace");
       santa = document.getElementById("santa");
       ground = document.getElementById("ground");
-      santaInterval = setInterval(time, santaSpeed); // Call the turn function periodically
-      stageInterval = setInterval(time, stageSpeed); // Call the turn function periodically
+      santaInterval = setInterval(alwaysHappening, santaSpeed); // Call the turn function periodically
+      stageInterval = setInterval(alwaysHappening, stageSpeed); // Call the turn function periodically
       oxo.elements.onCollisionWithElement(santa, fireplace, function() {
         console.log("you lost");
-      });
-      oxo.elements.onCollisionWithElement(santa, ground, function() {
-        oxo.animation.move(santa, directionDown, gravity, true);
       });
     });
   }
 });
-
 
 function alwaysHappening() {
   oxo.animation.move(fireplace, direction, size, true);

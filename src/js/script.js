@@ -1,8 +1,9 @@
-var speed = 10;
+var speed = 16;
 var direction = "left";
 var size = 1;
 var santa;
 var fireplace;
+var gift;
 
 turnInterval = setInterval(move, speed); // Call the turn function periodically
 
@@ -16,6 +17,7 @@ const DOM = {
 function getDOMElements() {
   DOM.fireplace = document.getElementById("santa");
   DOM.santa = document.getElementById("fireplace");
+  DOM.gift = document.getElementById("gift")
 }
 
 oxo.screens.loadScreen("game", function() {
@@ -32,3 +34,22 @@ function jump() {
 oxo.inputs.listenKey('up', function() {
   jump();
 });
+
+/** key for gift */
+function fall() {
+  oxo.animation.fall(DOM.santa, DOM.gift, direction, size, true);
+} 
+
+oxo.inputs(['space'], function(key){ 
+fall()
+});
+
+
+
+
+
+
+
+
+
+

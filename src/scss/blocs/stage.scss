@@ -4,6 +4,12 @@
   background: black;
   position: absolute;
   bottom: 0px;
+  display: flex;
+}
+.gift__hidden{
+  background: green;
+  width: 10px;
+  height: 10px;
 }
 
 .stage__fireplace {
@@ -14,3 +20,4 @@
   bottom: 100px;
   left: 500px;
 }
+

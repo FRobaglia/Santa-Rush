@@ -11,7 +11,6 @@
   font-size: 52px;
   justify-content: center;
   align-items: center;
-  
 }
 .home__subtitle {
   color: white;
@@ -40,8 +39,11 @@
   margin: 0 auto;
 }
 h2 {
-  font-size: 60px;
+  font-size: 30px;
   color: #FFFFFF;
+}
+.push {
+  margin-bottom: 50px;
 }
 .endscore {
   font-size: 80px;
@@ -54,3 +56,26 @@ h2 {
   width: 50%;
   margin-bottom: 100px;
 }
+footer {
+  display: flex;
+  justify-content: space-between;
+
+.instruction__one {
+ margin: 50px;
+ display: flex;
+ flex-direction: column;
+
+}
+.instruction__two {
+  margin: 50px;
+  display: flex;
+  flex-direction: column;
+ }
+ .icone__home {
+   margin: 0  auto;
+   width: 50px;
+   height: 50px;
+   padding: 50px 
+ }
+}
+

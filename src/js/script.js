@@ -24,12 +24,12 @@ var crossTwo = document.getElementById("crossTwo");
 var crossThree = document.getElementById("crossThree");
 var playerScore = oxo.player.getScore();
 
-oxo.inputs.listenKey("enter", function() {
+oxo.inputs.listenKey("enter", function () {
   // lorsque l'on appuie sur entrée
   if (oxo.screens.getCurrentScreen() !== "game") {
     // et que l'écran actuel n'est pas game
     oxo.player.setScore(0);
-    oxo.screens.loadScreen("game", function() {
+    oxo.screens.loadScreen("game", function () {
       mainSong.play();
       // load le screen game
       // appelle les fonctions générants aléatoirement respectivement les cheminées et le sol
@@ -54,13 +54,13 @@ oxo.inputs.listenKey("enter", function() {
         }
       });
       //jump max of the character
-        jump__max = oxo.elements.createElement({
-          obstacle: false,
-          class: "jump__max", // optional,
-          styles: { // optional
+      jump__max = oxo.elements.createElement({
+        obstacle: false,
+        class: "jump__max", // optional,
+        styles: { // optional
           transform: 'translate(0x, 700px)'
-          },
-        });
+        },
+      });
       santa = oxo.elements.createElement({
         // crée le santa
         class: "character__santa",
@@ -68,12 +68,12 @@ oxo.inputs.listenKey("enter", function() {
           transform: "translate(50px, 549px)" // positionne le santa sur le sol
         }
       });
-      oxo.elements.onCollisionWithElement(santa, ground__santa, function() {
+      oxo.elements.onCollisionWithElement(santa, ground__santa, function () {
         testGround = true;
         isFalling = false;
         console.log("collision with ground");
       });
-      oxo.elements.onCollisionWithElement(santa, jump__max, function() {
+      oxo.elements.onCollisionWithElement(santa, jump__max, function () {
         gravity = -gravity;
         isFalling = false;
         console.log("collision with ground");
@@ -81,7 +81,7 @@ oxo.inputs.listenKey("enter", function() {
       oxo.elements.onLeaveScreenOnce(
         // une fois que le sol initial sort de l'écran, on le delete du html pour les performances
         initialGround,
-        function() {
+        function () {
           initialGround.remove();
           clearInterval(stageInterval);
           console.log("initial ground Left");
@@ -91,14 +91,14 @@ oxo.inputs.listenKey("enter", function() {
       oxo.elements.onLeaveScreenOnce(
         // une fois que le sol initial sort de l'écran, on le delete du html pour les performances
         santa,
-        function() {
-          oxo.screens.loadScreen("end", function() {
+        function () {
+          oxo.screens.loadScreen("end", function () {
             end();
           });
         },
       );
 
-      oxo.inputs.listenKey("z", function() {
+      oxo.inputs.listenKey("z", function () {
         // lorsqu'on appuie sur z
         var yPos = oxo.animation.getPosition(santa).y + 150; // récupère la position du santa
         var gift = oxo.elements.createElement({
@@ -108,17 +108,17 @@ oxo.inputs.listenKey("enter", function() {
             transform: "translate(100px, " + yPos + "px)"
           }
         });
-        setInterval(function() {
+        setInterval(function () {
           // mouvement du cadeau (gravité)
           oxo.animation.move(gift, directionDown, 5, true);
         }, giftSpeed);
 
         var gifts = document.querySelectorAll(".stage__gift"); // on récupère tous les cadeaux dans un tableau
-        gifts.forEach(function(newGift) {
+        gifts.forEach(function (newGift) {
           oxo.elements.onCollisionWithElementOnce(
             newGift,
             giftCollisionTester,
-            function() {
+            function () {
               // si un cadeau collision avec le sol (plus exactement l'élément giftCollisionTester, qui est un sol invisible jusqu'au dessus du sol car le vrai sol est un obstacle et la collision est donc impossible)
               newGift.remove(); // on supprime le cadeau
               failSound.play();
@@ -126,11 +126,11 @@ oxo.inputs.listenKey("enter", function() {
               if (lifeCounter <= 0) {
                 console.log("lost");
                 // quand le joueur n'a plus de vies
-                oxo.screens.loadScreen("end", function() {
+                oxo.screens.loadScreen("end", function () {
                   // load l'écran end
                   end();
                 });
-              }  
+              }
               else if (lifeCounter === 2) {
                 document.getElementById("crossOne").className = 'isFilled';
               }
@@ -142,8 +142,8 @@ oxo.inputs.listenKey("enter", function() {
         });
 
         var fireplaces = document.querySelectorAll(".stage__fireplace"); // on récupère toutes les cheminées dans un tableau
-        fireplaces.forEach(function(fireplace) {
-          oxo.elements.onCollisionWithElementOnce(gift, fireplace, function() {
+        fireplaces.forEach(function (fireplace) {
+          oxo.elements.onCollisionWithElementOnce(gift, fireplace, function () {
             // à la collision avec une cheminée
             if (oxo.animation.getPosition(gift).y < 515) {
               // et seulement si le cadeau vient du haut
@@ -170,7 +170,7 @@ function fireplaceGeneration() {
     class: "stage__fireplace"
   });
 
-  var fireInterval = setInterval(function() {
+  var fireInterval = setInterval(function () {
     // bouge la cheminée vers la gauche de "size" pixels toutes les 10ms
     oxo.animation.move(fireplaceEl, directionLeft, size, true);
   }, 10);
@@ -178,7 +178,7 @@ function fireplaceGeneration() {
   oxo.elements.onLeaveScreenOnce(
     // la cheminée disparait à la sortie de l'écran
     fireplaceEl,
-    function() {
+    function () {
       fireplaceEl.remove();
       clearInterval(fireInterval);
       console.log("fireplace left");
@@ -198,13 +198,15 @@ function groundGeneration() {
     }
   });
 
-  var groundInterval = setInterval(function() {
+  var groundInterval = setInterval(function () {
     oxo.animation.move(ground, directionLeft, size, true);
   }, 10);
-
+  oxo.elements.onCollisionWithElementOnce(ground, santa, function () {
+    end();
+  });
   oxo.elements.onLeaveScreenOnce(
     ground,
-    function() {
+    function () {
       ground.remove();
       clearInterval(groundInterval);
       console.log("ground Left");
@@ -218,7 +220,7 @@ function jump() {
   gravity = -6;
 };
 
-function fall(){
+function fall() {
   gravity = -gravity;
 };
 
@@ -226,9 +228,10 @@ function playerFall() {
   // le santa tombe toujours de "gravity" pixel toutes les "santaSpeed" secondes (voir santaInterval)
   oxo.animation.move(santa, directionDown, gravity, true);
   if (lifeCounter > 0) {
-  oxo.player.addToScore(1);
+    oxo.player.addToScore(1);
   }
   updateScore();
+  mainSong.playbackRate += 0.00015;
 }
 
 function initialGroundMove() {
@@ -236,25 +239,25 @@ function initialGroundMove() {
   oxo.animation.move(initialGround, directionLeft, size, true);
 }
 
-var keycodeJump; 
+var keycodeJump;
 
-function down(){
-    if((keycodeJump === 38)&&(isFalling === true)){
+function down() {
+  if ((keycodeJump === 38) && (isFalling === true)) {
     fall();
     isFalling = false;
-     };
-  }
-document.addEventListener("keyup", function(e){
+  };
+}
+document.addEventListener("keyup", function (e) {
   keycodeJump = e.keyCode
-  down(); 
+  down();
 });
 
-oxo.inputs.listenKey("up", function() {
-  if(testGround){
+oxo.inputs.listenKey("up", function () {
+  if (testGround) {
     isFalling = true;
     jump();
     jumpSound.play();
-  } 
+  }
   testGround = false;
 });
 

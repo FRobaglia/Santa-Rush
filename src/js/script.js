@@ -69,7 +69,7 @@ oxo.inputs.listenKey("enter", function() {
         }
       });
       oxo.elements.onCollisionWithElement(santa, ground__santa, function() {
-        test = true;
+        testGround = true;
         isFalling = false;
         console.log("collision with ground");
       });
@@ -250,13 +250,12 @@ document.addEventListener("keyup", function(e){
 });
 
 oxo.inputs.listenKey("up", function() {
-  if(test){
+  if(testGround){
     isFalling = true;
     jump();
     jumpSound.play();
   } 
-  test = false;
-  console.log(test)
+  testGround = false;
 });
 
 function end() {

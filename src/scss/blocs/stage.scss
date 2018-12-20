@@ -31,6 +31,21 @@
   background-image : url(../assets/images/roof.jpg);
   background-size: contain;
 }
+
+.jump__max{
+  position: absolute;
+  width: 50px;
+  height: 77px;
+  top: 200px;
+  left: 75px;
+}
+
+.greenjump {
+  width: 100px;
+  height: 7px;
+  left: 70px;
+}
+
 .stage__fireplace {
   width: 150px;
   height: 300px;

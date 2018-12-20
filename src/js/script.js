@@ -11,6 +11,9 @@ var initialGround;
 var giftSpeed = 10; // refresh le cadeau toutes les 10ms
 var giftCollisionTester; // déclare la variable qui permet de détecter la collision entre le sol et un cadeau (plateforme juste au dessus du sol sous le personnage)
 var lifeCounter = 3; // initie le nombre de vies à 3 au démarrage
+var ground;
+var test;
+var isFalling = false;
 
 oxo.inputs.listenKeyOnce("enter", function() {
   // lorsque l'on appuie sur entrée
@@ -32,12 +35,37 @@ oxo.inputs.listenKeyOnce("enter", function() {
         class: "initial__ground",
         obstacle: true
       });
+      ground__santa = oxo.elements.createElement({
+        class: "greenjump",
+        obstacle: false,
+        styles: {
+          transform: "translate(60px, 699px)" // positionne le santa sur le sol
+        }
+      });
+      //jump max of the character
+        jump__max = oxo.elements.createElement({
+          obstacle: false,
+          class: "jump__max", // optional,
+          styles: { // optional
+          transform: 'translate(0x, 700px)'
+          },
+        });
       santa = oxo.elements.createElement({
         // crée le santa
         class: "character__santa",
         styles: {
           transform: "translate(50px, 549px)" // positionne le santa sur le sol
         }
+      });
+      oxo.elements.onCollisionWithElement(santa, ground__santa, function() {
+        test = true;
+        isFalling = false;
+        console.log("collision with ground");
+      });
+      oxo.elements.onCollisionWithElement(santa, jump__max, function() {
+        gravity = -gravity;
+        isFalling = false;
+        console.log("collision with ground");
       });
       oxo.elements.onLeaveScreenOnce(
         // une fois que le sol initial sort de l'écran, on le delete du html pour les performances
@@ -155,14 +183,12 @@ function groundGeneration() {
 }
 
 function jump() {
-  // saut du santa
-  if (gravity > 0) {
-    gravity = -gravity;
-    setTimeout(function() {
-      gravity = -gravity;
-    }, 1000);
-  }
-}
+  gravity = -6;
+};
+
+function fall(){
+  gravity = -gravity;
+};
 
 function playerFall() {
   // le santa tombe toujours de "gravity" pixel toutes les "santaSpeed" secondes (voir santaInterval)
@@ -178,7 +204,24 @@ function initialGroundMove() {
   oxo.animation.move(initialGround, directionLeft, size, true);
 }
 
+var keycodeJump; 
+
+function down(){
+    if((keycodeJump === 38)&&(isFalling === true)){
+    fall();
+    isFalling = false;
+     };
+  }
+document.addEventListener("keyup", function(e){
+  keycodeJump = e.keyCode
+  down(); 
+});
+
 oxo.inputs.listenKey("up", function() {
-  // fais sauter le santa quand on appuie sur up
-  jump();
+  if(test){
+    isFalling = true;
+    jump();
+  } 
+  test = false;
+  console.log(test)
 });

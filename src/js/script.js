@@ -15,11 +15,11 @@ var ground;
 var test;
 var isFalling = false;
 var mainSong = document.getElementById("mainSong");
-/* var crossOne = document.getElementById("crossOne");
+var crossOne = document.getElementById("crossOne");
 var crossTwo = document.getElementById("crossTwo");
-var crossThree = document.getElementById("crossThree"); */
+var crossThree = document.getElementById("crossThree");
 
-oxo.inputs.listenKeyOnce("enter", function() {
+oxo.inputs.listenKey("enter", function() {
   // lorsque l'on appuie sur entrée
   if (oxo.screens.getCurrentScreen() !== "game") {
     // et que l'écran actuel n'est pas game
@@ -121,8 +121,15 @@ oxo.inputs.listenKeyOnce("enter", function() {
                 // quand le joueur n'a plus de vies
                 oxo.screens.loadScreen("end", function() {
                   // load l'écran end
+                  end();
                 });
               }  
+              else if (lifeCounter === 2) {
+                document.getElementById("crossOne").className = 'isFilled';
+              }
+              else if (lifeCounter === 1) {
+                document.getElementById("crossTwo").className = 'isFilled';
+              }
             }
           );
         });
@@ -210,7 +217,7 @@ function playerFall() {
   // le santa tombe toujours de "gravity" pixel toutes les "santaSpeed" secondes (voir santaInterval)
   oxo.animation.move(santa, directionDown, gravity, true);
   if (lifeCounter > 0) {
-    oxo.player.addToScore(1);
+   // oxo.player.addToScore(1);
   }
   updateScore();
 }
@@ -241,3 +248,10 @@ oxo.inputs.listenKey("up", function() {
   test = false;
   console.log(test)
 });
+
+function end() {
+  clearInterval(santaInterval);
+  clearInterval(stageInterval);
+  clearInterval(groundInterval);
+
+}

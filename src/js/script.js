@@ -15,6 +15,10 @@ var ground;
 var test;
 var isFalling = false;
 var mainSong = document.getElementById("mainSong");
+var giftSound = document.getElementById("giftSound")
+var jumpSound = document.getElementById("jumpSound")
+var failSound = document.getElementById('failSound')
+var loseSound = document.getElementById('loseSound')
 var crossOne = document.getElementById("crossOne");
 var crossTwo = document.getElementById("crossTwo");
 var crossThree = document.getElementById("crossThree");
@@ -117,6 +121,7 @@ oxo.inputs.listenKey("enter", function() {
             function() {
               // si un cadeau collision avec le sol (plus exactement l'élément giftCollisionTester, qui est un sol invisible jusqu'au dessus du sol car le vrai sol est un obstacle et la collision est donc impossible)
               newGift.remove(); // on supprime le cadeau
+              failSound.play();
               lifeCounter--;
               if (lifeCounter <= 0) {
                 console.log("lost");
@@ -142,7 +147,9 @@ oxo.inputs.listenKey("enter", function() {
             // à la collision avec une cheminée
             if (oxo.animation.getPosition(gift).y < 515) {
               // et seulement si le cadeau vient du haut
+              giftSound.play();
               oxo.player.addToScore(1000); // alors le joueur gagne des points
+
               gift.remove(); // et le cadeau est supprimé
             }
           });
@@ -246,12 +253,14 @@ oxo.inputs.listenKey("up", function() {
   if(test){
     isFalling = true;
     jump();
+    jumpSound.play();
   } 
   test = false;
   console.log(test)
 });
 
 function end() {
+  loseSound.play();
   clearInterval(santaInterval);
   clearInterval(stageInterval);
   lifeCounter = 3;

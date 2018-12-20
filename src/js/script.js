@@ -267,4 +267,5 @@ function end() {
   clearInterval(stageInterval);
   lifeCounter = 3;
   updateScore();
+  mainSong.playbackRate = 1;
 }

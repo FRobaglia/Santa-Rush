@@ -2,4 +2,23 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  background: url(../assets/images/night_background.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: black;
+}
+
+h1, .score {
+  color: white;
+  font-size: 50px;
+  font-family: "VT323";
+  letter-spacing: 3px;
+}
+
+.score {
+  top: 20px;
+  left: 20px;
+  display: flex;
+  position: absolute;
+  font-family: "VT323";
 }

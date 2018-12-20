@@ -1,22 +1,45 @@
 .stage__ground {
-  width: 100vw;
+  width: 1800px;
   height: 100px;
-  background: black;
   position: absolute;
+  bottom: 0;
+  z-index: 2;
+  background-image : url(../assets/images/roof.jpg);
+  background-size: contain;
 }
-.gift__hidden{
-  background: green;
-  width: 10px;
-  height: 10px;
+.stage__gift {
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: url(../assets/images/giftbox.svg);
 }
-
+.stage__gift--tester {
+  position: absolute;
+  bottom: 105px;
+  width : 150px;
+  z-index: 10;
+  background-color: transparent;
+  height: 1px;
+}
+.initial__ground {
+  width: 300vw;
+  height: 100px;
+  position: absolute;
+  bottom: 0;
+  background-image : url(../assets/images/roof.jpg);
+  background-size: contain;
+}
 .stage__fireplace {
-  width: 100px;
-  height: 100px;
-  background: blue;
+  width: 150px;
+  height: 300px;
+  background-image: url(../assets/images/fireplace.png);
+  background-size: contain;
+  background-repeat: no-repeat;
   position: absolute;
-  bottom: 100px;
-  left: 500px;
+  bottom: -70px;
+  z-index: 3;
+  left: 1380px;
   overflow: hidden;
 }
-

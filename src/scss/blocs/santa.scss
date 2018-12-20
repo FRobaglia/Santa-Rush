@@ -1,7 +1,10 @@
 .character__santa {
-  width: 100px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   background: red;
   position: absolute;
+  background: url(../assets/images/santa.gif);
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 0;
 }
-

@@ -253,5 +253,5 @@ function end() {
   clearInterval(santaInterval);
   clearInterval(stageInterval);
   clearInterval(groundInterval);
-
+  lifeCounter = 3;
 }

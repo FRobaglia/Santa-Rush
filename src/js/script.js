@@ -14,12 +14,17 @@ var lifeCounter = 3; // initie le nombre de vies à 3 au démarrage
 var ground;
 var test;
 var isFalling = false;
+var mainSong = document.getElementById("mainSong");
+/* var crossOne = document.getElementById("crossOne");
+var crossTwo = document.getElementById("crossTwo");
+var crossThree = document.getElementById("crossThree"); */
 
 oxo.inputs.listenKeyOnce("enter", function() {
   // lorsque l'on appuie sur entrée
   if (oxo.screens.getCurrentScreen() !== "game") {
     // et que l'écran actuel n'est pas game
     oxo.screens.loadScreen("game", function() {
+      mainSong.play();
       // load le screen game
       // appelle les fonctions générants aléatoirement respectivement les cheminées et le sol
       setTimeout(fireplaceGeneration, 2000);
@@ -77,6 +82,16 @@ oxo.inputs.listenKeyOnce("enter", function() {
         },
         true
       );
+      oxo.elements.onLeaveScreenOnce(
+        // une fois que le sol initial sort de l'écran, on le delete du html pour les performances
+        santa,
+        function() {
+          oxo.screens.loadScreen("end", function() {
+            lifeCounter = 0;
+          });
+        },
+      );
+
       oxo.inputs.listenKey("z", function() {
         // lorsqu'on appuie sur z
         var yPos = oxo.animation.getPosition(santa).y + 150; // récupère la position du santa
@@ -100,13 +115,14 @@ oxo.inputs.listenKeyOnce("enter", function() {
             function() {
               // si un cadeau collision avec le sol (plus exactement l'élément giftCollisionTester, qui est un sol invisible jusqu'au dessus du sol car le vrai sol est un obstacle et la collision est donc impossible)
               newGift.remove(); // on supprime le cadeau
-              lifeCounter = lifeCounter - 1; // le joueur perds une vie
+              lifeCounter--;
               if (lifeCounter <= 0) {
+                console.log("lost");
                 // quand le joueur n'a plus de vies
                 oxo.screens.loadScreen("end", function() {
                   // load l'écran end
                 });
-              }
+              }  
             }
           );
         });
@@ -179,7 +195,7 @@ function groundGeneration() {
     },
     true
   );
-  setTimeout(groundGeneration, 5500 + oxo.utils.getRandomNumber(0, 1000));
+  setTimeout(groundGeneration, 5250 + oxo.utils.getRandomNumber(0, 1000));
 }
 
 function jump() {

@@ -58,3 +58,28 @@
   left: 1380px;
   overflow: hidden;
 }
+.cross__one, .cross__two {
+  margin-right: 15px;
+}
+.crosses {
+  display: flex ;
+  position: absolute;
+  top: 90px;
+  left: 20px;
+.cross__one, .cross__two, .cross__three {
+  width: 40px; 
+  height: 30px; 
+  background-image: url(../assets/images/whitecross.png);
+  background-size: 100%;
+  background-position: 100% 100%;
+}
+}
+
+.isFilled {
+  width: 40px; 
+  height: 30px; 
+  background-image: url(../assets/images/redCross.png);
+  background-size: 100%;
+  background-position: 100% 100%;
+  margin-right: 15px;
+}
